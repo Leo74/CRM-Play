@@ -1,6 +1,8 @@
 
 $(function() {
     console.log( "ready!" );
+	$('.crm-main-content').hide();
+	$('#page-genstats').show();
 	
 	$('#menu-dashboard').click(function(){
 		$('.crm-main-content').hide();
