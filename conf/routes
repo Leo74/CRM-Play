@@ -1,0 +1,42 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+
+GET     /                           controllers.Application.index()
+POST	/							controllers.Application.authenticateUser()
+
+#GET		/test				 	   controllers.Application.test()
+#POST	/test					   controllers.Application.testSubmit()
+
+#GET		/listUsers				   	controllers.Application.getUsers()
+#POST	/login					   		controllers.Application.authenticateUser()
+POST 	/addNewCustomerUser				controllers.Application.addCustomerUser()
+GET 	/logout							controllers.Application.logOut()
+GET		/forgotPassword				controllers.Application.forgotPassword()
+
+#GET	/customerPage				controllers.Application.customerPage()
+
+GET		/addNewMerchant				controllers.Application.addMerchant(fullName:String, busName:String, contact:String, email:String, address:String)
+GET		/fetchAllMerchant			controllers.Application.getAllMerchants()
+
+#GET		/showTransactionData		controllers.Application.showTransactionData()
+#GET		/addTransactionData			controllers.Application.addTransactionData()
+	
+		
+# UI data fetching 
+GET 	/fetchTransactionTable		controllers.Application.fetchTransactionTable(status:String)
+GET		/fetchCustomerFeedback		controllers.Application.fetchCustomerFeedback()
+GET		/fetchCustomerComplaints	controllers.Application.fetchComplaints()
+
+# The clock Comet stream
+#GET     /clock                      controllers.Application.liveClock()
+
+
+# View
+#GET 	/register					controllers.Application.registerUserShow()
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
