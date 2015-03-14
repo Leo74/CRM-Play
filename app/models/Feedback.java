@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import play.data.format.Formats;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 //import play.db.jpa.*;
@@ -21,13 +23,22 @@ public class Feedback extends Model{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long id;
     
+	@ManyToOne
     public Customer customer;
 
-    public Merchant merchant;
-    
+	@ManyToOne
+	public Merchant merchant;
+  
+    @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date date;
 
     public String FeedbackData;
+    
+//    @Column(columnDefinition="default 0")
+    public boolean adminRead;
+    
+//    @Column(columnDefinition="default 0")
+    public boolean merchantRead;
     
     @Required
     public String status;

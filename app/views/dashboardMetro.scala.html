@@ -39,7 +39,7 @@
    <link href="@routes.Assets.at("css/style-default.css")" rel="stylesheet" id="style_color" />
    <link href="@routes.Assets.at("assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css")" rel="stylesheet" />
    <link href="@routes.Assets.at("assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css")" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="@routes.Assets.at("assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css")" rel="stylesheet" type="text/css" media="screen"/>
+   <link href="@routes.Assets.at("assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css")" rel="stylesheet" type="text/css" media="screen"/>
 
    
 </head>
@@ -61,6 +61,7 @@
 
                   Customer Relationship Management
 				  
+				  
 			   @if( session.get("userType").equals("admin")) {
 						 (Admin)
                }
@@ -70,6 +71,8 @@
 			   }
 			   
 			   </a>
+				<!-- <h1 id="clock"></h1>
+ -->
                <!-- END LOGO -->
                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
                <a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
@@ -89,9 +92,8 @@
                        <!-- BEGIN SUPPORT -->
                        <li class="dropdown" id="header_notification_bar">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
                                <i class="icon-bell-alt"></i>
-                               <span class="badge badge-warning">7</span>
+                               <span class="badge badge-warning"></span>
                            </a>
                            <ul class="dropdown-menu extended notification">
                                <li>
@@ -140,7 +142,7 @@
                        <li class="dropdown" id="header_inbox_bar">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                <i class="icon-envelope-alt"></i>
-                               <span class="badge badge-important">5</span>
+                               <span class="badge badge-important"></span>
                            </a>
                            <ul class="dropdown-menu extended inbox">
                                <li>
@@ -203,7 +205,6 @@
                        <!-- BEGIN USER LOGIN DROPDOWN -->
                        <li class="dropdown">
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <img src="img/avatar1_small.jpg" alt="">
                                <span class="username">@session.get("userName")</span>
                                <b class="caret"></b>
                            </a>
@@ -362,62 +363,63 @@
 					   
 					</div>
 					<div class="widget-body">
-						<div class="text-center">
-							<div class="easy-pie-chart">
-								 <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="55"><span>55</span>%<canvas width="110" height="110"></canvas></div>
+						<div class="text-center pieSuccess">
+							<div>Successful Transactions</div>
+							<div class="easy-pie-chart pieToday">
+								 <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart pie1" data-percent="55"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">Today</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieWeek">
 								<div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="70"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Week</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieMonth">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="20"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Month</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieYear">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="90"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Year</div>
 							</div>
 						</div>
 					</div>
 					<div class="widget-body">
-					   <div class="text-center">
-						
-							<div class="easy-pie-chart">
+					   <div class="text-center piePending">
+							<div>Pending Transactions</div>
+							<div class="easy-pie-chart pieToday">
 								 <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="55"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">Today</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieWeek">
 								<div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="70"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Week</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieMonth">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="20"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Month</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieYear">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="90"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Year</div>
 							</div>
 						</div>
 					</div>
 					<div class="widget-body">
-					   <div class="text-center">
-						
-							<div class="easy-pie-chart">
+					   <div class="text-center pieUnsuccess">	
+					   		<div>Unsuccessful Transactions</div>
+							<div class="easy-pie-chart pieToday">
 								 <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="55"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">Today</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieWeek">
 								<div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="70"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Week</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieMonth">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="20"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Month</div>
 							</div>
-							<div class="easy-pie-chart">
+							<div class="easy-pie-chart pieYear">
 							   <div style="width: 110px; height: 110px; line-height: 110px;" id="sparkline_bar" class="percentage-light easyPieChart" data-percent="90"><span>55</span>%<canvas width="110" height="110"></canvas></div>
 								<div class="title">This Year</div>
 							</div>
@@ -442,35 +444,35 @@
 						<div class="widget-body">
 							<!--BEGIN METRO STATES-->
 							<div class="metro-nav">
-								<div class="metro-nav-block nav-block-orange">
-									<a data-original-title="" href="#">
-										<i class="icon-user"></i>
-										<div class="info">321</div>
-										<div class="status">Total</div>
-									</a>
-								</div>
-								<div class="metro-nav-block nav-block-yellow">
-									<a data-original-title="" href="#">
-										<i class="icon-tags"></i>
-										<div class="info">+970</div>
-										<div class="status">Success</div>
-									</a>
-								</div>
-								<div class="metro-nav-block nav-block-grey">
-									<a data-original-title="" href="#">
-										<i class="icon-comments-alt"></i>
-										<div class="info">49</div>
-										<div class="status">Pending</div>
-									</a>
-								</div>
-								<div class="metro-nav-block nav-block-blue">
-									<a data-original-title="" href="#">
-										<i class="icon-eye-open"></i>
-										<div class="info">+897</div>
-										<div class="status">Unsuccess</div>
-									</a>
-								</div>
-								<!-- <div class="metro-nav-block nav-block-red">
+									<div id="box-TotalTran" class="metro-nav-block nav-block-orange">
+										<a data-original-title="" href="#">
+											<i class="icon-user"></i>
+											<div class="info">321</div>
+											<div class="status">Total</div>
+										</a>
+									</div>
+									<div id="box-SuccessTran" class="metro-nav-block nav-block-yellow">
+										<a data-original-title="" href="#">
+											<i class="icon-tags"></i>
+											<div class="info">+970</div>
+											<div class="status">Success</div>
+										</a>
+									</div>
+									<div id="box-PendingTran" class="metro-nav-block nav-block-grey">
+										<a data-original-title="" href="#">
+											<i class="icon-comments-alt"></i>
+											<div class="info">49</div>
+											<div class="status">Pending</div>
+										</a>
+									</div>
+									<div id="box-UnsuccessTran" class="metro-nav-block nav-block-blue">
+										<a data-original-title="" href="#">
+											<i class="icon-eye-open"></i>
+											<div class="info">+897</div>
+											<div class="status">Unsuccess</div>
+										</a>
+									</div>
+									<!-- <div class="metro-nav-block nav-block-red">
 									<a data-original-title="" class="text-center" href="#">
 										<i class="icon-lightbulb"></i>
 										<div class="status">Incomplete</div>
@@ -603,24 +605,23 @@
 								</div>
                             </form>
                             <!-- END FORM-->
-   
                         </div>
                     </div>
                     <!-- END SAMPLE FORM PORTLET-->
                 </div>
             </div>
             <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel2">Account created</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Merchant Account successfully.Login details sent to merchant's email address.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button data-dismiss="modal" class="btn btn-primary">OK</button>
-                                </div>
-                            </div>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel2">Account created</h3>
+				</div>
+				<div class="modal-body">
+					<p>Merchant Account successfully.Login details sent to merchant's email address.</p>
+				</div>
+				<div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-primary">OK</button>
+				</div>
+			</div>
 		</div>
          <!-- END PAGE CONTAINER-->	 
 <!-- ##################	END Add MERCHANT ############################ -- >
@@ -860,78 +861,7 @@
                     </div>
                     <div class="widget-body" id="TransactionTable">
 					</div
-					<div class="widget-body">
-							
-					
-                        <table class="table table-striped table-bordered" id="sample_1">
-						    <thead>
-                            <tr>
-                                <th style="width:8px;">SR.No</th>
-                                <th>Name</th>
-                                <th class="hidden-phone">Transaction ID</th>
-                                <th class="hidden-phone">Date</th>
-                                <th class="hidden-phone">Payment Type</th>
-								 <th class="hidden-phone">Customer Name</th>
-                                <th class="hidden-phone">Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="odd gradeX">
-                                <td>1</td>
-                                <td><a href="#myModal1" data-toggle="modal" role="button">Jhone doe</a></td>
-                                <td class="hidden-phone">977897676</td>
-                                <td class="hidden-phone">02.03.2013</td>
-                                <td class="center hidden-phone">Axis Bank</td>
-								<td class="center hidden-phone">Jhon David</td>
-								
-                                <td class="hidden-phone"><span class="btn  btn-danger">Pending</span></td>
-                            </tr>
-                            <tr class="odd gradeX">
-                                <td>2</td>
-                                <td><a href="#myModal1" data-toggle="modal" role="button">Jhone doe</a></td>
-                                <td class="hidden-phone">977897676</td>
-                                <td class="hidden-phone">02.03.2013</td>
-                                <td class="center hidden-phone">Axis Bank</td>
-								<td class="center hidden-phone">Jhon David</td>
-                                <td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>
-                            </tr>
-							<tr class="odd gradeX">
-                                <td>3</td>
-                                <td><a href="#myModal1" data-toggle="modal" role="button">Jhone doe</a></td>
-                                <td class="hidden-phone">977897676</td>
-                                <td class="hidden-phone">02.03.2013</td>
-                                <td class="center hidden-phone">Axis Bank</td>
-								<td class="center hidden-phone">Jhon David</td>
-                                <td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>
-                            </tr>
-							<tr class="odd gradeX">
-                                <td>4</td>
-                                <td><a href="#myModal1" data-toggle="modal" role="button">Jhone doe</a></td>
-                                <td class="hidden-phone">977897676</td>
-                                <td class="hidden-phone">02.03.2013</td>
-                                <td class="center hidden-phone">Axis Bank</td>
-								<td class="center hidden-phone">Jhon David</td>
-								
-                                <td class="hidden-phone"><span class="btn  btn-danger">Pending</span></td>
-                            </tr>
-                            
-                            <tr class="odd gradeX">
-                                <td>1</td>
-								
-                                <td><a href="#myModal1" data-toggle="modal" role="button">Jhone doe</a></td>
-                                <td class="hidden-phone">977897676</td>
-                                <td class="hidden-phone">02.03.2013</td>
-                                <td class="center hidden-phone">Axis Bank</td>
-								<td class="center hidden-phone">Jhon David</td>
-								
-                                <td class="hidden-phone"><span class="btn  btn-danger">Pending</span></td>
-                            </tr>
-                            
-                            </tbody>
-                        </table>
-                    
-					</div>
-                </div>
+		        </div>
                 </div>
             </div>			
 		<!-- END EXAMPLE TABLE widget-->

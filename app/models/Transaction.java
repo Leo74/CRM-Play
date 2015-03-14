@@ -1,8 +1,9 @@
 package models;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,7 @@ public class Transaction extends Model{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	public long transationId;
+	public long id;
 	
 	@Required
 	public Date date;
@@ -31,6 +32,8 @@ public class Transaction extends Model{
 	@Required
 	public String status;
 
+	
+	public String description;
 
     @ManyToOne
     public Customer customer;
@@ -40,13 +43,25 @@ public class Transaction extends Model{
     
     @ManyToOne
     public Merchant merchant;
-    
+
+    @ManyToOne
+    public Country buyingLocation;
+
+    @ManyToOne
+    public Bank bank;
+
     // transaction type
 	//
 	
+//  @Column(columnDefinition="default 0")
+	public boolean adminRead;
 	
+//    @Column(columnDefinition="default 0")
+	public boolean merchantRead;
 	
+	public String OTP;
 	
+	public Date optSendDate;
 	
 	
 	public static Finder<Long,Transaction> find = new Finder<Long,Transaction>(Long.class, Transaction.class);

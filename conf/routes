@@ -7,28 +7,40 @@
 GET     /                           controllers.Application.index()
 POST	/							controllers.Application.authenticateUser()
 
-#GET		/test				 	   controllers.Application.test()
-#POST	/test					   controllers.Application.testSubmit()
+# GET		/test				 	   controllers.Application.test()
+# POST		/test					   controllers.Application.testSubmit()
 
-#GET		/listUsers				   	controllers.Application.getUsers()
-#POST	/login					   		controllers.Application.authenticateUser()
-POST 	/addNewCustomerUser				controllers.Application.addCustomerUser()
-GET 	/logout							controllers.Application.logOut()
-GET		/forgotPassword				controllers.Application.forgotPassword()
+# GET		/listUsers				   	controllers.Application.getUsers()
+POST 		/addNewCustomerUser				controllers.Application.addCustomerUser()
+#POST		/login					   		controllers.Application.authenticateUser()
+GET 		/logout							controllers.Application.logOut()
+GET			/forgotPassword				controllers.Application.forgotPassword()
 
-#GET	/customerPage				controllers.Application.customerPage()
+#GET		/customerPage				controllers.Application.customerPage()
 
-GET		/addNewMerchant				controllers.Application.addMerchant(fullName:String, busName:String, contact:String, email:String, address:String)
-GET		/fetchAllMerchant			controllers.Application.getAllMerchants()
+GET			/addNewMerchant				controllers.Application.addMerchant(fullName:String, busName:String, contact:String, email:String, address:String)
 
 #GET		/showTransactionData		controllers.Application.showTransactionData()
 #GET		/addTransactionData			controllers.Application.addTransactionData()
 	
+
 		
 # UI data fetching 
+
+#GET     /clock                      controllers.Application.liveClock()
+
+GET		/fetchDashboardStat			controllers.Application.fetchDashboardStat()
 GET 	/fetchTransactionTable		controllers.Application.fetchTransactionTable(status:String)
 GET		/fetchCustomerFeedback		controllers.Application.fetchCustomerFeedback()
 GET		/fetchCustomerComplaints	controllers.Application.fetchComplaints()
+
+
+GET 	/fetchAllProducts			controllers.Application.getAllProducts()
+GET		/fetchAllMerchants			controllers.Application.getAllMerchants()
+GET		/fetchAllBanks				controllers.Application.getAllBanks()
+GET		/fetchAllCountries			controllers.Application.getAllCountries()
+
+
 
 # The clock Comet stream
 #GET     /clock                      controllers.Application.liveClock()
@@ -38,5 +50,24 @@ GET		/fetchCustomerComplaints	controllers.Application.fetchComplaints()
 #GET 	/register					controllers.Application.registerUserShow()
 
 
+############ Customer Requests
+#GET		/customerPage				controllers.CustomerController.customerPage()
+
+#GET 	/buyProductList				controllers.CustomerController.buyProductList()
+#GET 	/buyMerchantList			controllers.CustomerController.buyMerchantList()
+#GET		/buyBankList				controllers.CustomerController.buyBankList()
+#GET		/buyBankList				controllers.CustomerController.buyBankList()
+
+
+GET 	/proceedToPay				controllers.CustomerController.proceedToPay(payMode:String, payBankId:Integer, payMerchantId:Integer, payProductId:Integer, payCountryId:Long)
+GET		/submitOPT					controllers.CustomerController.submitOPT(otp:String, tranId:Integer, trialCount:Integer)
+
+		
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+
+
+

@@ -7,6 +7,7 @@ var Script = function () {
         size: 95,
         barColor:'#4a8bc2'
     });
+	
     $('.percentage-light').easyPieChart({
         barColor: function(percent) {
             percent /= 100;

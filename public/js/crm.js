@@ -1,7 +1,123 @@
 
+
+var g_Interval;
+
+function startDashboardStats()
+{
+	var query ='';
+	$.ajax({	
+		url: "fetchDashboardStat",
+		type: "GET",
+		data: query,
+		beforeSend:function(){
+			clearInterval(g_Interval);
+		},
+		success: function(tranArray){
+			$("#box-TotalTran .info").html(tranArray.successTran + tranArray.pendingTran + tranArray.unsuccessTran);
+			$("#box-SuccessTran .info").html(tranArray.successTran);
+			$("#box-PendingTran .info").html(tranArray.pendingTran);
+			$("#box-UnsuccessTran .info").html(tranArray.unsuccessTran);
+
+			
+			// Success
+			//
+			$('.pieSuccess .pieToday .percentage-light').data('easyPieChart').update(tranArray.successToday);
+			$('.pieSuccess .pieWeek .percentage-light').data('easyPieChart').update(tranArray.successWeek);
+			$('.pieSuccess .pieMonth .percentage-light').data('easyPieChart').update(tranArray.successMonth);			
+			$('.pieSuccess .pieYear .percentage-light').data('easyPieChart').update(tranArray.successYear);
+		
+			$('.pieSuccess .pieToday .percentage-light span').text(tranArray.successToday);
+			$('.pieSuccess .pieWeek .percentage-light span').text(tranArray.successWeek);
+			$('.pieSuccess .pieMonth .percentage-light span').text(tranArray.successMonth);
+			$('.pieSuccess .pieYear .percentage-light span').text(tranArray.successYear);
+			
+			
+			//  Pending
+			//
+			$('.piePending .pieToday .percentage-light').data('easyPieChart').update(tranArray.pendingToday);
+			$('.piePending .pieWeek .percentage-light').data('easyPieChart').update(tranArray.pendingWeek);
+			$('.piePending .pieMonth .percentage-light').data('easyPieChart').update(tranArray.pendingMonth);
+			$('.piePending .pieYear .percentage-light').data('easyPieChart').update(tranArray.pendingYear );
+
+			$('.piePending .pieToday .percentage-light span').text(tranArray.pendingToday);
+			$('.piePending .pieWeek .percentage-light span').text(tranArray.pendingWeek);
+			$('.piePending .pieMonth .percentage-light span').text(tranArray.pendingMonth);
+			$('.piePending .pieYear .percentage-light span').text(tranArray.pendingYear );
+			
+			// Unsuccess
+			//
+			$('.pieUnsuccess .pieToday .percentage-light').data('easyPieChart').update(tranArray.unsuccessToday);
+			$('.pieUnsuccess .pieWeek .percentage-light').data('easyPieChart').update(tranArray.unsuccessWeek);
+			$('.pieUnsuccess .pieMonth .percentage-light').data('easyPieChart').update(tranArray.unsuccessMonth);
+			$('.pieUnsuccess .pieYear .percentage-light').data('easyPieChart').update(tranArray.unsuccessYear);
+
+			$('.pieUnsuccess .pieToday .percentage-light span').text(tranArray.unsuccessToday);
+			$('.pieUnsuccess .pieWeek .percentage-light span').text(tranArray.unsuccessWeek);
+			$('.pieUnsuccess .pieMonth .percentage-light span').text(tranArray.unsuccessMonth);
+			$('.pieUnsuccess .pieYear .percentage-light span').text(tranArray.unsuccessYear);
+
+			if (tranArray.unseenTranCount > 0)
+			{
+				$('#header_notification_bar .badge-warning').text(tranArray.unseenTranCount);	
+			}
+			
+			if (tranArray.unseenNotificationCount > 0)
+			{
+				$('#header_notification_bar .badge-important').text(tranArray.unseenNotificationCount);	
+			}
+			
+			
+
+			g_Interval = window.setInterval(startDashboardStats, 20000);		
+		}
+	});
+}
+
+
+
+
+
+
+function rendar()
+{
+	alert("here");
+var newValue = 10;
+	$('.pieSuccess .pieToday .percentage-light').data('easyPieChart').update(newValue);
+	$('.pieSuccess .pieWeek .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.pieSuccess .pieMonth .percentage-light').data('easyPieChart').update(newValue+ 5);
+	$('.pieSuccess .pieYear .percentage-light').data('easyPieChart').update(newValue + 5);
+
+	$('.piePending .pieToday .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.piePending .pieWeek .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.piePending .pieMonth .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.piePending .pieYear .percentage-light').data('easyPieChart').update(newValue + 5);
+
+	$('.pieUnsuccess .pieToday .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.pieUnsuccess .pieWeek .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.pieUnsuccess .pieMonth .percentage-light').data('easyPieChart').update(newValue + 5);
+	$('.pieUnsuccess .pieYear .percentage-light').data('easyPieChart').update(newValue + 5);
+
+/*
+
+	 $('.percentage, .percentage-light').each(function() {
+		var newValue = Math.round(100*Math.random());
+		$(this).data('easyPieChart').update(newValue);
+		$('span', this).text(newValue);
+	});
+  */ 
+}
+
+
+
 $(function() {
     console.log( "ready!" );
-	$('.crm-main-content').hide();
+	g_Interval = window.setInterval(startDashboardStats, 1000);
+	/*
+	var clockChanged = function(time) {
+		$('#clock').html(time.replace(/(\d)/g, '<span>$1</span>'))
+	}*/
+
+	$('.crm-main-content').hide();	
 	$('#page-genstats').show();
 	
 	$('#menu-dashboard').click(function(){
@@ -207,70 +323,70 @@ $(function() {
 
 		
 ///////////////      fetching Data
+		
 	
 	function fetchTransactionTable()
 	{
 		var status = $('#tranStatusType').val();
 		var query = 'status=' + status;
 		
-	
 		$.ajax({
-				url: "fetchTransactionTable",
-				type: "GET",
-				data: query,
-				success: function(tranArray){
-					var tab = '<table class="table table-striped table-bordered">'+
-										'<tr>'+
-											'<td>SR.No</td>'+
-											'<td>Product Name</td>'+
-											'<td>Transaction ID</td>'+
-											'<td>Amount</td>'+
-											'<td>Date</td>'+
-											'<td>Customer Name</td>';
-								if (status == "all")
-								{
-									tab += '<td>Status</td>';
-								}							
-							tab += '</tr>';
-
-							for (var i = 0; i < tranArray.length; i++)
+			url: "fetchTransactionTable",
+			type: "GET",
+			data: query,
+			success: function(tranArray){
+				var tab = '<table class="table table-striped table-bordered">'+
+									'<tr>'+
+										'<td>Sr No.</td>'+
+										'<td>Product Name</td>'+
+										'<td>Transaction ID</td>'+
+										'<td>Amount</td>'+
+										'<td>Date</td>'+
+										'<td>Customer Name</td>';
+							if (status == "all")
 							{
-								var row = tranArray[i];
-								tab += '<tr>'+
-												'<td>'+ (i + 1) +'</td>'+
-												'<td>'+ row.product.name +'</td>'+
-												'<td>'+ row.transationId +'</td>'+
-												'<td>'+ row.amount +'</td>'+
-												'<td>'+ row.date +'</td>'+
-												'<td>'+ row.customer.Customername +'</td>';
-	
-								if (status == "all")
+								tab += '<td>Status</td>';
+							}							
+						tab += '</tr>';
+
+						for (var i = 0; i < tranArray.length; i++)
+						{
+							var row = tranArray[i];
+							tab += '<tr>'+
+											'<td>'+ (i + 1) +'</td>'+
+											'<td>'+ row.product.name +'</td>'+
+											'<td>'+ row.id +'</td>'+
+											'<td>'+ row.amount +'</td>'+
+											'<td>'+ row.date +'</td>'+
+											'<td>'+ row.customer.first_name +' ' +  row.customer.last_name +'</td>';
+
+							if (status == "all")
+							{
+								if  (row.status.toUpperCase() == "PENDING")
 								{
-									if  (row.status == "pending")
-									{
-										tab += '<td class="hidden-phone"><span class="btn  btn-danger">Pending</span></td>';
-									}
-									else if (row.status == "success")
-									{
-										tab += '<td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>';
-                            		}
-									else if (row.status == "unsuccess")
-									{
-										tab += '<td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>';
-                            		}	
-								}			
-								tab += '</tr>';
-							}
-							
+									tab += '<td class="hidden-phone"><span class="btn  btn-danger">Pending</span></td>';
+								}
+								else if (row.status.toUpperCase() == "SUCCESS")
+								{
+									tab += '<td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>';
+								}
+								else if (row.status.toUpperCase() == "UNSUCCESS")
+								{
+									tab += '<td class="hidden-phone"><span class="btn  btn-success">Completed</span></td>';
+								}	
+							}			
+							tab += '</tr>';
+						}
+						
 //[{"transationId":1,"date":null,"amount":1000.0,"status":"pending","  ":{"id":10,"Customername":null,"email":"abc1@gmail.com","name":"abcd","password":"123456"},"product":{"id":21,"name":"Pepsi1","type":"COD","amount":1.0},"merchant":{"id":5,"full_name":"ABC XYZ1","business_name":"Shri ganesh 2","contact":"98756451","email":null,"website":null,"address":"Address 3","faxno":"FAX-1234561","rank":null,"password":"123456"}},{"transationId":2,"date":null,"amount":1000.0,"status":"success","customer":{"id":11,"Customername":null,"email":"abc2@gmail.com","name":"abcde","password":"123456"},"product":{"id":22,"name":"Pepsi2","type":"COD","amount":10.0},"merchant":{"id":6,"full_name":"ABC XYZ1","business_name":"Shri ganesh 3","contact":"98756451","email":null,"website":null,"address":"Address 4","faxno":"FAX-1234561","rank":null,"password":"123456"}},{"transationId":3,"date":null,"amount":1000.0,"status":"unsuccess","customer":{"id":12,"Customername":null,"email":"abc3@gmail.com","name":"abcdef","password":"123456"},"product":{"id":23,"name":"Pepsi3","type":"COD","amount":100.0},"merchant":{"id":7,"full_name":"ABC XYZ1","business_name":"Shri ganesh 4","contact":"98756451","email":null,"website":null,"address":"Address 5","faxno":"FAX-1234561","rank":null,"password":"123456"}},{"transationId":4,"date":null,"amount":1000.0,"status":"success","customer":{"id":13,"Customername":null,"email":"abc4@gmail.com","name":"abcdefg","password":"123456"},"product":{"id":24,"name":"Pepsi4","type":"COD","amount":1000.0},"merchant":{"id":8,"full_name":"ABC XYZ1","business_name":"Shri ganesh 5","contact":"98756451","email":null,"website":null,"address":"Address 6","faxno":"FAX-1234561","rank":null,"password":"123456"}}]
-							
-						tab += '</table>';
-						$('#TransactionTable').html(tab);
-				},
-				error : function(){
-					alert("Failed to add merchant.!!");
-				}
-			});
+						
+					tab += '</table>';
+					$('#TransactionTable').html(tab);
+			},
+			error : function(){
+				alert("Failed to add merchant.!!");
+			}
+		});
 		
 	}
 	
@@ -307,7 +423,7 @@ $(function() {
 								tab += '<tr>'+
 												'<td>'+ (i + 1) +'</td>'+
 												'<td>'+ row.product.name +'</td>'+
-												'<td>'+ row.transationId +'</td>'+
+												'<td>'+ row.id +'</td>'+
 -												'<td>'+ row.amount +'</td>'+
 												'<td>'+ row.date +'</td>'+
 												'<td>'+ row.customer.Customername +'</td>';

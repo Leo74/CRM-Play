@@ -197,14 +197,14 @@ public class Way2SMS {
                 }
                 
                 System.out.println("SendResult......" + SendResult);
-                if(SendResult.toString().contains("Message has been submitted successfully"))
+/*                if(SendResult.toString().contains("Message has been submitted successfully"))
                 {
                     System.out.println("Message sent to "+phoneNumber+" successfully.");
                 }
                 else
                 {
                     System.err.println("Message could not send to "+phoneNumber+". Also check login credentials");
-                }
+                }*/
                 bufferedReader.close();
                 
             }catch (UnsupportedEncodingException ex) {
